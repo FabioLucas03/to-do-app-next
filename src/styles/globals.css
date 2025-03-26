@@ -1,0 +1,625 @@
+@import 'bulma/css/bulma.min.css';
+
+:root {
+  --purple-primary: rgb(106, 50, 159);
+  --purple-dark: rgb(86, 40, 129);
+  --purple-light: rgb(126, 70, 179);
+  --purple-border: rgba(106, 50, 159, 0.5);
+  --purple-shadow: rgba(106, 50, 159, 0.25); /* Aumentando opacidade da sombra */
+  --purple-glow: rgba(106, 50, 159, 0.4); /* Aumentando opacidade do brilho */
+  --background-dark: #151515;
+  --background-card: #1e1e1e;
+  --background-hover: #252525;
+  --text-light: #f5f5f5;
+  --border-radius: 8px;
+}
+
+/* Estilos globais para garantir aplicação em toda a tela */
+html, body {
+  background-color: var(--background-dark);
+  color: var(--text-light);
+  min-height: 100vh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#__next {
+  min-height: 100vh;
+  background-color: var(--background-dark);
+}
+
+.section, .container, main {
+  background-color: var(--background-dark);
+  color: var(--text-light);
+}
+
+.has-background-light, .has-background-white, .has-background-white-bis, .has-background-white-ter {
+  background-color: var(--background-card) !important;
+}
+
+.has-background-dark {
+  background-color: var(--background-dark) !important;
+}
+
+/* Estilos para botões - Todos os botões serão roxos por padrão */
+.button {
+  background-color: var(--purple-primary);
+  color: white;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  border-color: transparent;
+}
+
+.button:hover {
+  background-color: var(--purple-dark);
+  color: white;
+}
+
+.button:active {
+  transform: scale(0.98);
+}
+
+/* Garantir que os botões primários sejam sempre roxo */
+.button.is-primary {
+  background-color: rgb(106, 50, 159) !important;
+  color: white !important;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  border-color: transparent !important;
+}
+
+.button.is-primary:hover {
+  background-color: rgb(86, 40, 129) !important;
+  color: white !important;
+}
+
+.button.is-primary:focus {
+  background-color: rgb(106, 50, 159) !important;
+  color: white !important;
+}
+
+/* Exceções para botões específicos */
+.button.is-danger {
+  background-color: #f14668;
+}
+
+.button.is-danger:hover {
+  background-color: #e03c5a;
+}
+
+.button.is-danger.is-outlined {
+  background-color: transparent;
+  border-color: #f14668;
+  color: #f14668;
+}
+
+.button.is-danger.is-outlined:hover {
+  background-color: rgba(241, 70, 104, 0.1);
+}
+
+/* Botão sem cor (como o "Cancelar") */
+.button.is-text, .button.is-ghost {
+  background-color: transparent;
+  color: var(--purple-primary);
+  border-color: transparent;
+}
+
+.button.is-text:hover, .button.is-ghost:hover {
+  background-color: rgba(106, 50, 159, 0.1);
+  color: var(--purple-light);
+}
+
+/* O botão do timer também deve ser roxo */
+.timer-button, 
+.timer-controls .button {
+  background-color: var(--purple-primary);
+  color: white;
+}
+
+.timer-button:hover, 
+.timer-controls .button:hover {
+  background-color: var(--purple-dark);
+}
+
+/* Ajustes específicos para botões de controle do timer */
+.timer-controls .button, 
+.card .buttons .button:not(.is-danger) {
+  background-color: var(--purple-primary);
+  color: white;
+}
+
+.timer-controls .button:hover, 
+.card .buttons .button:not(.is-danger):hover {
+  background-color: var(--purple-dark);
+  color: white;
+}
+
+/* Estilos para botões de ação das tarefas */
+.button.is-info.is-outlined {
+  background-color: transparent;
+  border-color: var(--purple-primary);
+  color: var(--purple-primary);
+}
+
+.button.is-info.is-outlined:hover {
+  background-color: rgba(106, 50, 159, 0.1);
+  border-color: var(--purple-light);
+  color: var(--purple-light);
+}
+
+.buttons.are-small {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  margin-bottom: 0;
+}
+
+/* Garantir que os botões de ação das tarefas sejam quadrados e do mesmo tamanho */
+.card .buttons.are-small .button {
+  height: 28px;
+  width: 28px;
+  padding: 0;
+  justify-content: center;
+}
+
+/* Estilos para Cards */
+.card {
+  background-color: var(--background-card);
+  color: var(--text-light);
+  margin-left: 0;
+  margin-right: 0;
+  width: 100%;
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6), 0 0 0 1px var(--background-card), 0 0 0 4px var(--purple-shadow); /* Sombra mais forte */
+  transition: box-shadow 0.2s ease;
+  border: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background-color: transparent;
+}
+
+.card:hover {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.7), 0 0 0 1px var(--background-hover), 0 0 0 4px var(--purple-glow); /* Sombra hover mais intensa */
+  background-color: var(--background-hover);
+}
+
+/* Estilos para prioridades */
+.card[data-priority="high"]::before {
+  background-color: rgba(241, 70, 104, 0.8);
+  box-shadow: 0 0 12px rgba(241, 70, 104, 0.7); /* Brilho mais forte */
+}
+
+.card[data-priority="medium"]::before {
+  background-color: rgba(255, 221, 87, 0.8);
+  box-shadow: 0 0 12px rgba(255, 221, 87, 0.7);
+}
+
+.card[data-priority="low"]::before {
+  background-color: rgba(62, 142, 208, 0.8);
+  box-shadow: 0 0 12px rgba(62, 142, 208, 0.7);
+}
+
+/* Estilos para inputs */
+.input, .select select, .textarea {
+  background-color: #1a1a1a;
+  color: var(--text-light);
+  border-color: var(--purple-primary);
+  border-radius: var(--border-radius);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid transparent;
+  box-shadow: 0 0 0 1px rgba(106, 50, 159, 0.4); /* Sombra mais visível */
+}
+
+.input:hover, .select select:hover, .textarea:hover {
+  box-shadow: 0 0 0 1px rgba(106, 50, 159, 0.6);
+}
+
+.input:focus, .select select:focus, .textarea:focus {
+  border-color: var(--purple-light);
+  box-shadow: 0 0 0 1px rgba(106, 50, 159, 0.8), 0 0 0 4px var(--purple-shadow); /* Sombra de foco mais forte */
+  border-color: transparent;
+}
+
+.select:after {
+  border-color: var(--purple-primary) !important;
+}
+
+/* Estilos para conteúdo e layouts */
+.content {
+  width: 100%;
+  margin: 0 auto;
+  max-width: 100%;
+  color: var(--text-light);
+}
+
+.content h1, .content h2, .content h3, .content h4, .content h5, .content h6,
+.content p, .content ul, .content ol, .content table {
+  color: var(--text-light);
+}
+
+.filters {
+  background: var(--background-dark);
+  padding: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  text-align: center;
+  border-radius: 0;
+  box-shadow: 0 2px 0 var(--purple-shadow), 0 -2px 0 var(--purple-shadow); /* Sombra mais espessa */
+  border: none;
+}
+
+.column .content {
+  padding-left: 0;
+  padding-right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.column {
+  background-color: var(--background-dark);
+}
+
+/* Garantir que todas as seções de tarefas tenham o mesmo estilo e tamanho */
+.pending-tasks, .completed-tasks, .overdue-tasks, .filtered-tasks {
+  width: 100%;
+  max-width: 100%;
+  text-align: left;
+  background-color: var(--background-dark);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.task-container {
+  width: 100%;
+  max-width: 100%;
+  display: block;
+}
+
+/* Estilos para projetos */
+.project-list .card {
+  margin-bottom: 0.75rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5), 0 0 0 1px var(--background-card), 0 0 0 4px var(--purple-shadow);
+}
+
+.project-list .card::before {
+  background-color: var(--purple-primary);
+  box-shadow: 0 0 12px var(--purple-primary); /* Brilho mais forte */
+}
+
+.project-delete-btn {
+  height: 28px;
+  width: 28px;
+  padding: 0;
+  justify-content: center;
+}
+
+/* Efeito de linha-através para tarefas concluídas */
+.line-through {
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+
+/* Estilização de containers */
+.box {
+  border-radius: var(--border-radius);
+  background-color: #1a1a1a;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5), 0 0 0 1px #1a1a1a, 0 0 0 4px var(--purple-shadow); /* Sombra mais forte */
+  border: none;
+}
+
+.box.has-background-dark {
+  background: #1a1a1a;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5), 0 0 0 1px #1a1a1a, 0 0 0 4px var(--purple-shadow);
+  border: none;
+}
+
+/* Estilos para o modal de detalhes da tarefa */
+.file-list .box,
+.comments-list .box {
+  border: 1px solid rgba(106, 50, 159, 0.2);
+  transition: all 0.2s ease;
+}
+
+.file-list .box:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6), 0 0 0 1px var(--background-card), 0 0 0 3px var(--purple-shadow);
+}
+
+.modal-card-body h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid var(--purple-border);
+  padding-bottom: 0.3rem;
+}
+
+/* Melhorar o estilo dos arquivos */
+.file-name {
+  background-color: #1a1a1a;
+  color: var(--text-light);
+}
+
+.file-cta {
+  background-color: var(--purple-primary);
+  color: white;
+  border: none;
+}
+
+.file-cta:hover {
+  background-color: var(--purple-dark);
+}
+
+/* Ajustes para os títulos */
+.title, .subtitle {
+  font-weight: 600;
+  color: var(--text-light);
+}
+
+.title.has-text-light, .subtitle.has-text-light {
+  color: var(--text-light) !important;
+}
+
+/* Estilos para o modal e formulários */
+.modal-card {
+  border: none;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(0,0,0,0.1), 0 0 0 5px var(--purple-shadow); /* Sombra mais dramática */
+}
+
+.modal-card-body {
+  background-color: #1a1a1a;
+}
+
+.modal-card-head {
+  background-color: #1a1a1a;
+  border-bottom: 1px solid rgba(106, 50, 159, 0.3); /* Borda mais visível */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Sombra mais pronunciada */
+}
+
+.modal-card-foot {
+  background-color: #1a1a1a;
+  border-top: 1px solid rgba(106, 50, 159, 0.2);
+}
+
+.modal-card-title {
+  color: var(--text-light);
+}
+
+.modal-card-body .label {
+  text-align: left;
+}
+
+.modal-card-body .field {
+  text-align: left;
+}
+
+/* Estilização para tags */
+.tag {
+  font-weight: 600;
+  border-radius: 4px;
+}
+
+/* Estilização para checkbox */
+input[type="checkbox"] {
+  accent-color: var(--purple-primary);
+}
+
+/* Estilização para scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--purple-primary);
+  border-radius: 4px;
+  box-shadow: 0 0 5px rgba(106, 50, 159, 0.5); /* Adicionando sombra na scrollbar */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--purple-light);
+  box-shadow: 0 0 8px rgba(106, 50, 159, 0.7);
+}
+
+/* Estilos para tarefas atrasadas */
+.overdue-task {
+  border-left-color: #f14668 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6), 0 0 0 1px var(--background-card), 0 0 0 4px rgba(241, 70, 104, 0.3) !important;
+}
+
+.overdue-task:hover {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.7), 0 0 0 1px var(--background-hover), 0 0 0 4px rgba(241, 70, 104, 0.5) !important;
+}
+
+.overdue-text {
+  color: #f14668 !important;
+  font-weight: 600;
+}
+
+.overdue-tasks .title.is-5 {
+  color: #f14668;
+  font-weight: 700;
+}
+
+/* Estilos para o modal de detalhes da tarefa */
+.task-detail-modal {
+  max-width: 900px;
+  width: 100%;
+  min-height: 500px;
+}
+
+.task-detail-content {
+  padding: 0;
+  text-align: left;
+}
+
+.task-info-section {
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+
+.task-info-section h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+  border-bottom: 1px solid var(--purple-border);
+  padding-bottom: 0.3rem;
+  color: var(--text-light);
+  text-align: left;
+}
+
+.file-list .box,
+.comments-list .box {
+  border: 1px solid rgba(106, 50, 159, 0.2);
+  transition: all 0.2s ease;
+  background-color: #1a1a1a;
+  margin-bottom: 0.75rem;
+}
+
+.file-list .box:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6), 0 0 0 1px var(--background-card), 0 0 0 3px var(--purple-shadow);
+}
+
+/* Melhorar o estilo dos arquivos */
+.file-cta {
+  background-color: var(--purple-primary);
+  color: white;
+  border: none;
+}
+
+.file-name {
+  background-color: #1a1a1a;
+  color: var(--text-light);
+}
+
+.file-cta:hover {
+  background-color: var(--purple-dark);
+}
+
+/* Espaçamento interno do modal */
+.modal-card-body {
+  padding: 1.5rem;
+}
+
+.task-header {
+  margin-bottom: 1.5rem;
+}
+
+.tags {
+  margin-bottom: 0;
+}
+
+/* Estilos para as abas no modal de detalhes da tarefa */
+.tabs.is-boxed li.is-active a {
+  background-color: var(--purple-primary);
+  border-color: var(--purple-primary);
+  color: white;
+}
+
+.tabs.is-boxed li a {
+  border: 1px solid var(--purple-border);
+  margin-right: 3px;
+  transition: all 0.3s ease;
+}
+
+.tabs.is-boxed li a:hover {
+  background-color: rgba(106, 50, 159, 0.1);
+  border-color: var(--purple-border);
+}
+
+.tabs ul {
+  border-bottom-color: var(--purple-border);
+}
+
+.tab-content {
+  min-height: 320px;
+}
+
+.notification.is-info.is-light {
+  background-color: rgba(32, 156, 238, 0.1);
+  color: var(--text-light);
+}
+
+.notification {
+  background-color: #1a1a1a;
+  padding: 1.25rem;
+  border-radius: var(--border-radius);
+  border: 1px solid rgba(106, 50, 159, 0.1);
+}
+
+/* Estilo para os comentários */
+.comments-list .box {
+  transition: all 0.2s ease;
+}
+
+.comments-list .buttons {
+  opacity: 0.2;
+  transition: opacity 0.2s ease;
+}
+
+.comments-list .box:hover .buttons {
+  opacity: 1;
+}
+
+.edit-comment-form {
+  background-color: #1e1e1e;
+  border-radius: var(--border-radius);
+  padding: 0.75rem;
+}
+
+/* Estilo para o checklist */
+.checklist-item {
+  transition: all 0.2s ease;
+  background-color: #1a1a1a;
+}
+
+.checklist-item:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6), 0 0 0 1px var(--background-card), 0 0 0 3px var(--purple-shadow);
+}
+
+.checklist-item .buttons {
+  opacity: 0.2;
+  transition: opacity 0.2s ease;
+}
+
+.checklist-item:hover .buttons {
+  opacity: 1;
+}
+
+.progress {
+  margin-bottom: 1rem;
+  height: 0.75rem;
+  border-radius: 0.25rem;
+}
+
+.line-through {
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+
+/* Animação para o indicador de tempo ativo */
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+
+.is-animated {
+  animation: pulse 2s infinite;
+}
