@@ -95,7 +95,8 @@ export default function TaskForm({ taskToEdit, initialProject, onClose }: TaskFo
       const updatedTask = {
         ...taskToEdit,
         ...taskData,
-        id: taskToEdit.id // garantir que temos o ID
+        id: taskToEdit.id, // garantir que temos o ID
+        deadline: new Date(taskData.deadline), // Converter string para Date
       };
       
       updateTask(updatedTask, { showLoading: true }).then(updatedTask => {

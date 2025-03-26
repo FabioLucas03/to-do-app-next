@@ -1,39 +1,33 @@
 import axios from 'axios';
 import { Project, Task, Comment, ChecklistItem } from '../types';
 
-const API_BASE_URL = 'http://localhost:8080/api';
-
 const api = axios.create({
-  baseURL: API_BASE_URL,
+  baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3600/api',
+  timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
-  },
+  }
 });
 
-// Add request logging
+// Adicionar interceptores para debugging
 api.interceptors.request.use(
-  (config) => {
-    console.log(`🚀 API REQUEST: ${config.method?.toUpperCase()} ${config.url}`);
-    if (config.data) {
-      console.log('📦 Request Payload:', config.data);
-    }
+  config => {
+    console.log(`🌐 API Request to: ${config.baseURL}${config.url}`);
     return config;
   },
-  (error) => {
-    console.error('❌ Request Error:', error);
+  error => {
+    console.error('❌ API Request Error:', error);
     return Promise.reject(error);
   }
 );
 
-// Add response logging
 api.interceptors.response.use(
-  (response) => {
-    console.log(`✅ API RESPONSE ${response.status}: ${response.config.method?.toUpperCase()} ${response.config.url}`);
-    console.log('📦 Response Data:', response.data);
+  response => {
+    console.log(`✅ API Response from: ${response.config.url}`, response.status);
     return response;
   },
-  (error) => {
-    console.error('❌ Response Error:', error.response?.data || error.message);
+  error => {
+    console.error('❌ API Response Error:', error);
     return Promise.reject(error);
   }
 );

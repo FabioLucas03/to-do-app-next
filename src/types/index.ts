@@ -25,7 +25,7 @@ export interface Task {
   description: string;
   project: string | { id: string; name: string; }; // Atualizado para aceitar string ou objeto
   projectId?: string; // Adicionado para maior compatibilidade
-  deadline: Date;
+  deadline: Date | string; // Modificar para aceitar tanto Date quanto string
   priority: 'low' | 'medium' | 'high';
   completed: boolean;
   timeSpent: number; // in seconds
